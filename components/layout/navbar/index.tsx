@@ -4,46 +4,52 @@ import { getMenu } from 'lib/shopify';
 import { Menu } from 'lib/shopify/types';
 import Link from 'next/link';
 import { Suspense } from 'react';
+import { Heart, Search, User } from 'react-feather';
 import MobileMenu from './mobile-menu';
-const { SITE_NAME } = process.env;
-
 export default async function Navbar() {
   const menu = await getMenu('next-js-frontend-header-menu');
-  console.log(menu);
   return (
-    <nav className="relative flex items-center justify-between p-4 lg:px-6">
-      <div className="block flex-none md:hidden">
-        <MobileMenu menu={menu} />
-      </div>
-      <Link href="/" className="mr-2 flex items-center justify-center md:w-auto lg:mr-6">
-        <div className="ml-2 flex-none text-sm font-medium uppercase md:hidden lg:block">
-          <img src="/images/logo.png" alt="loomis" className="" />
+    <nav className="relative h-[4rem]  border-b border-gray-200 p-4 shadow shadow-neutral-200 lg:px-6">
+      <div className="nav-wrapper flex items-center justify-between max-w-[85.25rem] mx-auto">
+        <div className="flex">
+          <MobileMenu menu={menu} />
+          <Link href="/" className="mr-2 flex items-center justify-center md:w-auto lg:mr-6">
+            <div className="ml-2 flex-none text-sm font-medium uppercase">
+              <img src="/images/logo.png" alt="loomis" className="" />
+            </div>
+          </Link>
         </div>
-      </Link>
-      <div className="flex ">
-        {menu.length ? (
-          <ul className="hidden gap-6 text-sm md:flex md:items-center">
-            {menu.map((item: Menu) => (
-              <li key={item.title}>
-                <Link
-                  href={item.path}
-                  className="text-neutral-500 underline-offset-4 hover:text-black hover:underline  "
-                >
-                  {item.title}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        ) : null}
-      </div>
+        <div className="hidden lg:flex">
+          {menu.length ? (
+            <ul className="flex items-center gap-6 text-xs uppercase">
+              {menu.map((item: Menu) => (
+                <li key={item.title}>
+                  <Link
+                    href={item.path}
+                    className="tracking-wider text-neutral-500 underline-offset-4 hover:text-black hover:underline"
+                  >
+                    {item.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          ) : null}
+        </div>
 
-      <div className="flex justify-end">
-        {/* <div className="hidden justify-center md:flex md:w-1/3">
+        <div className="flex items-center justify-end space-x-4">
+          {/* <div className="justify-center md:flex md:w-1/3">
           <Search />
         </div> */}
-        <Suspense fallback={<OpenCart />}>
-          <Cart />
-        </Suspense>
+          <Search className="h-4 w-4" />
+          <Heart className="h-4 w-4" />
+          <Suspense fallback={<OpenCart />}>
+            <Cart />
+          </Suspense>
+          <User className="h-4 w-4 md:hidden" />
+          <Link href="/" className="hidden bg-[#F4A482] px-4 py-2 text-sm text-white md:block">
+            Login
+          </Link>
+        </div>
       </div>
     </nav>
   );

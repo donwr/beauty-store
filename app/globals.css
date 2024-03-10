@@ -14,3 +14,14 @@ input,
 button {
   @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-50 ;
 }
+
+/* Homepage */
+/* Hero Font */
+.cormorant {
+  font-family: var(--font-cormorant);
+}
+
+/* Custom Hero Image Object Position */
+.hero-image-position{
+  object-position: 50% 30%;
+}

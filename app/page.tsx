@@ -1,3 +1,4 @@
+import { Hero } from 'components/home/hero';
 
 export const runtime = 'edge';
 
@@ -11,8 +12,7 @@ export const metadata = {
 export default async function HomePage() {
   return (
     <>
-
-    
+      <Hero />
     </>
   );
 }
