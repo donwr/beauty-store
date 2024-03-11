@@ -1,13 +1,5 @@
-// app/api/shopify/collection-products/route.ts
-
-import { getCollectionProducts } from '@/lib/shopify'; // Adjust the import path as necessary
+import { getCollectionProducts } from '@/lib/shopify';
 import { NextResponse } from 'next/server';
-
-// Optional: Define for more specific control over request handling
-export const config = {
-  runtime: 'experimental-edge'
-};
-
 export async function GET(request: Request) {
   const url = new URL(request.url);
   const collection = url.searchParams.get('collection');
