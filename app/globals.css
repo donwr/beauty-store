@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @supports (font: -apple-system-body) and (-webkit-appearance: none) {
   img[loading='lazy'] {
     clip-path: inset(0.6px);
@@ -12,7 +11,16 @@
 a,
 input,
 button {
-  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-50 ;
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-50;
+}
+
+*,
+:root,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--font-montserrat), Arial, Helvetica, sans-serif;
 }
 
 /* Homepage */
@@ -22,6 +30,40 @@ button {
 }
 
 /* Custom Hero Image Object Position */
-.hero-image-position{
+.hero-image-position {
   object-position: 50% 30%;
+}
+
+/* Filled Icon */
+.filled-icon {
+  fill: #e09c7f;
+  color: #e09c7f;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #e09c7f;
+  border-radius: 10px;
+}
+
+/* Hide scrollbar for WebKit-based browsers */
+.menu-no-scrollbar::-webkit-scrollbar {
+  display: none; /* This will hide the scrollbar in WebKit browsers */
+}
+
+/* Hide scrollbar for Firefox */
+.menu-no-scrollbar {
+  scrollbar-width: none; /* This will hide the scrollbar in Firefox */
+  -ms-overflow-style: none; /* This is for Internet Explorer 10+ */
 }

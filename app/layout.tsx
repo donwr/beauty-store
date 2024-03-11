@@ -1,7 +1,8 @@
 import Navbar from 'components/layout/navbar';
 import { GeistSans } from 'geist/font';
+import SmoothScrolling from 'lib/smoothScrollling';
 import { ensureStartsWith } from 'lib/utils';
-import { Cormorant } from 'next/font/google';
+import { Cormorant, Montserrat } from 'next/font/google';
 import { ReactNode, Suspense } from 'react';
 import './globals.css';
 
@@ -14,8 +15,14 @@ const twitterSite = TWITTER_SITE ? ensureStartsWith(TWITTER_SITE, 'https://') : 
 const cormorant = Cormorant({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-cormorant',
-})
+  variable: '--font-cormorant'
+});
+
+const montserrat = Montserrat({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-montserrat'
+});
 export const metadata = {
   metadataBase: new URL(baseUrl),
   title: {
@@ -38,12 +45,17 @@ export const metadata = {
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={`${GeistSans.variable} ${cormorant.variable}`}>
+    <html
+      lang="en"
+      className={`${GeistSans.variable} ${cormorant.variable} ${montserrat.variable}`}
+    >
       <body className="bg-neutral-50 text-black selection:bg-teal-300">
-        <Navbar />
-        <Suspense>
-          <main>{children}</main>
-        </Suspense>
+        <SmoothScrolling>
+          <Navbar />
+          <Suspense>
+            <main>{children}</main>
+          </Suspense>
+        </SmoothScrolling>
       </body>
     </html>
   );

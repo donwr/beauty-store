@@ -80,7 +80,8 @@ export type ProductVariant = {
     name: string;
     value: string;
   }[];
-  price: Money;
+  priceV2: Money; 
+  compareAtPriceV2?: Money; 
 };
 
 export type SEO = {
@@ -115,6 +116,7 @@ export type ShopifyProduct = {
   title: string;
   description: string;
   descriptionHtml: string;
+  productType: string;
   options: ProductOption[];
   priceRange: {
     maxVariantPrice: Money;

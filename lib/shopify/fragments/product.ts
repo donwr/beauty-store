@@ -9,6 +9,7 @@ const productFragment = /* GraphQL */ `
     title
     description
     descriptionHtml
+    productType
     options {
       id
       name
@@ -34,7 +35,11 @@ const productFragment = /* GraphQL */ `
             name
             value
           }
-          price {
+          priceV2 { # Updated to use priceV2
+            amount
+            currencyCode
+          }
+          compareAtPriceV2 { # Added compareAtPriceV2
             amount
             currencyCode
           }
