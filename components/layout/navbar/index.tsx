@@ -9,7 +9,7 @@ import MobileMenu from './mobile-menu';
 export default async function Navbar() {
   const menu = await getMenu('next-js-frontend-header-menu');
   return (
-    <nav className="relative h-[4rem]  border-b border-gray-200 p-4 shadow shadow-neutral-200 lg:px-6">
+    <nav className="sticky top-0 h-[4rem] bg-white border-b border-gray-200 p-4 shadow shadow-neutral-200 lg:px-6 z-[1000]">
       <div className="nav-wrapper flex items-center justify-between max-w-[85.25rem] mx-auto">
         <div className="flex">
           <MobileMenu menu={menu} />

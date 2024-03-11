@@ -35,7 +35,8 @@ body {
 }
 
 /* Filled Icon */
-.filled-icon {
+.filled-icon,
+.heart-icon:hover {
   fill: #e09c7f;
   color: #e09c7f;
 }

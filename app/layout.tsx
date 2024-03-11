@@ -1,3 +1,4 @@
+import Footer from '@/components/layout/footer';
 import Navbar from 'components/layout/navbar';
 import { GeistSans } from 'geist/font';
 import SmoothScrolling from 'lib/smoothScrollling';
@@ -49,12 +50,13 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
       lang="en"
       className={`${GeistSans.variable} ${cormorant.variable} ${montserrat.variable}`}
     >
-      <body className="bg-neutral-50 text-black selection:bg-teal-300">
+      <body className="bg-white text-black selection:bg-teal-300">
         <SmoothScrolling>
           <Navbar />
           <Suspense>
             <main>{children}</main>
           </Suspense>
+          <Footer />
         </SmoothScrolling>
       </body>
     </html>
