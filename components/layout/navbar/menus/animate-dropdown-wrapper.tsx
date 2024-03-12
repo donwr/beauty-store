@@ -16,7 +16,7 @@ const AnimatedDropdownWrapper: React.FC<AnimatedDropdownWrapperProps> = ({ isVis
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.95 }}
           transition={{ duration: 0.2, ease: "easeInOut" }}
-          className="shadown-md absolute left-0 top-10 flex h-full w-full flex-col bg-white"
+          className="shadown-md absolute left-0 top-9 flex w-full flex-col bg-white"
         >
           {children}
         </motion.div>

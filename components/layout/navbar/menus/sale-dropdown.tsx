@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 export const SaleDropdown = () => {
   return (
-    <div className="h-[80vh] w-full flex flex-col">
+    <div className="h-[75vh] w-full flex flex-col">
       <div className="relative flex h-[11rem] overflow-hidden border border-neutral-50 bg-[#FCF7F5]">
         {/* Background SVGs */}
         <img src="/images/sale.png" alt="" className="absolute left-0 top-0 h-[15rem] w-[15rem]" />

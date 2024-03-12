@@ -1,4 +1,5 @@
 import Footer from '@/components/layout/footer';
+import { DropdownProvider } from '@/context/dropdown-context';
 import Navbar from 'components/layout/navbar';
 import { GeistSans } from 'geist/font';
 import SmoothScrolling from 'lib/smoothScrollling';
@@ -52,11 +53,13 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
     >
       <body className="bg-white text-black selection:bg-teal-300">
         <SmoothScrolling>
-          <Navbar />
-          <Suspense>
-            <main>{children}</main>
-          </Suspense>
-          <Footer />
+          <DropdownProvider>
+            <Navbar />
+            <Suspense>
+              <main>{children}</main>
+            </Suspense>
+            <Footer />
+          </DropdownProvider>
         </SmoothScrolling>
       </body>
     </html>
