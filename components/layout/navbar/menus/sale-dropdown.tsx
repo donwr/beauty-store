@@ -1,59 +1,9 @@
-const salesDropdownCategories = [
-  {
-    image: '/images/sales-dropdown-category-shoes.png',
-    alt: 'shoes',
-    text: 'Shoes',
-    link: '/search/shoes'
-  },
-  {
-    image: '/images/sales-dropdown-category-outerwear.png',
-    alt: 'outerwear',
-    text: 'Outerwear',
-    link: '/search/outerwear'
-  },
-  {
-    image: '/images/sales-dropdown-category-skirts.png',
-    alt: 'skirts',
-    text: 'Skirts',
-    link: '/search/skirts'
-  },
-  {
-    image: '/images/sales-dropdown-category-dresses.png',
-    alt: 'dresses',
-    text: 'Dresses',
-    link: '/search/dresses'
-  },
-  {
-    image: '/images/sales-dropdown-category-accessories.png',
-    alt: 'accessories',
-    text: 'Accessories',
-    link: '/search/accessories'
-  },
-  {
-    image: '/images/sales-dropdown-category-jeans.png',
-    alt: 'jeans',
-    text: 'Jeans',
-    link: '/search/jeans'
-  },
-
-  {
-    image: '/images/sales-dropdown-category-tops.png',
-    alt: 'tops',
-    text: 'Tops',
-    link: '/search/tops'
-  },
-
-  {
-    image: '/images/sales-dropdown-category-coats.png',
-    alt: 'coats',
-    text: 'Coats',
-    link: '/search/coats'
-  }
-];
+import { salesDropdownCategories } from '@/data/menu-dropdown-info';
+import { motion } from 'framer-motion';
 
 export const SaleDropdown = () => {
   return (
-    <div className="shadown-md absolute left-0 top-10 flex h-[80vh] w-full flex-col bg-white">
+    <div className="h-[80vh] w-full flex flex-col">
       <div className="relative flex h-[11rem] overflow-hidden border border-neutral-50 bg-[#FCF7F5]">
         {/* Background SVGs */}
         <img src="/images/sale.png" alt="" className="absolute left-0 top-0 h-[15rem] w-[15rem]" />
@@ -71,7 +21,7 @@ export const SaleDropdown = () => {
         </div>
       </div>
       {/* This div now takes up the remaining space */}
-      <div className="flex flex-grow">
+      <div className="flex flex-grow bg-white">
         <div className="left flex h-full w-1/2 flex-col p-8">
           <h4 className="mb-4 text-sm font-semibold uppercase text-black">shop by sex</h4>
           <div className="choice-container flex h-full gap-x-4">
@@ -107,13 +57,13 @@ export const SaleDropdown = () => {
           <div className="grid grid-cols-2 gap-4 overflow-y-auto">
             {salesDropdownCategories.map((category, index) => {
               return (
-                <div
-                  className="category-option flex items-center space-x-4 border-2 border-neutral-50 px-4 py-4"
+                <motion.div
                   key={index}
+                  className="category-option flex items-center space-x-4 border-2 border-neutral-50 px-4 py-4"
                 >
                   <img src={category.image} alt={category.alt} className="h-8 w-8 object-cover" />
                   <p className="text-sm">{category.text}</p>
-                </div>
+                </motion.div>
               );
             })}
           </div>

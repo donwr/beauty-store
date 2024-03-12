@@ -1,6 +1,9 @@
-'use client';
+"use client";
+import AnimatedDropdownWrapper from '@/components/layout/navbar/menus/animate-dropdown-wrapper'; // Adjust the import path accordingly
 import { useDropdown } from '@/context/dropdown-context';
 import { useEffect } from 'react';
+import { ClothingDropdown } from './menus/clothing-dropdown';
+import { NewInDropdown } from './menus/new-in-dropdown';
 import { SaleDropdown } from './menus/sale-dropdown';
 
 const NavbarMenu = () => {
@@ -9,16 +12,20 @@ const NavbarMenu = () => {
 
   useEffect(() => {
     registerComponent('SALE', <SaleDropdown />);
+    registerComponent('NEW IN', <NewInDropdown />);
+    registerComponent('CLOTHING', <ClothingDropdown />);
   }, [registerComponent]);
 
-  const menuOptions = ['SALE', 'NEW IN', 'CLOTHING'];
+  const menuOptions = ['SALE', 'NEW IN', 'CLOTHING', 'SHOES', "ACCESSORIES", "GIFTS", "COLLECTIONS"];
 
   return (
     <ul className="relative w-full flex space-x-4 justify-center text-sm">
       {menuOptions.map((item) => (
-        <li key={item} onClick={() => toggleDropdown(item)}>
+        <li className="cursor-pointer" key={item} onClick={() => toggleDropdown(item)}>
           {item}
-          {isDropdownOpen(item) && getComponentForDropdown(item)}
+          <AnimatedDropdownWrapper isVisible={isDropdownOpen(item)}>
+            {getComponentForDropdown(item)}
+          </AnimatedDropdownWrapper>
         </li>
       ))}
     </ul>

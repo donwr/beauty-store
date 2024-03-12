@@ -1,7 +1,7 @@
 import { salesDropdownCategories } from '@/data/menu-dropdown-info';
 import { motion } from 'framer-motion';
 
-export const ClothingDropdown = () => {
+export const CollectionsDropdown = () => {
   return (
     <>
       <div className="relative flex h-[11rem] overflow-hidden border border-neutral-50 bg-[#FCF7F5]">
