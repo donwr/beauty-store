@@ -1,18 +1,20 @@
 import Collections from 'components/layout/search/collections';
-import FilterList from 'components/layout/search/filter';
+import { AlternateFilterList } from 'components/layout/search/filter';
 import { sorting } from 'lib/constants';
 import { Suspense } from 'react';
 
 export default function SearchLayout({ children }: { children: React.ReactNode }) {
   return (
     <Suspense>
-      <div className="mx-auto flex max-w-screen-2xl flex-col gap-8 px-4 pb-4 text-black  md:flex-row my-8">
-        <div className="order-first w-full flex-none md:max-w-[125px]">
+      <div className="mx-auto my-8 flex max-w-[85.25rem] flex-col gap-8 px-4 pb-4  text-black md:flex-row">
+        <div className="order-first w-full flex-none md:max-w-[180px]">
           <Collections />
         </div>
-        <div className="order-last min-h-screen w-full md:order-none">{children}</div>
-        <div className="order-none flex-none md:order-last md:w-[125px]">
-          <FilterList list={sorting} title="Sort by" />
+        <div className="order-last min-h-screen w-full md:order-none">
+          <div className="order-none flex justify-end md:order-last mb-8">
+            <AlternateFilterList list={sorting} title="Sort by" />
+          </div>
+          {children}
         </div>
       </div>
     </Suspense>

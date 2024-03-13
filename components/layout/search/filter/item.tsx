@@ -5,6 +5,7 @@ import { SortFilterItem } from 'lib/constants';
 import { createUrl } from 'lib/utils';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
+import { ChevronRight } from 'react-feather';
 import type { ListItem, PathFilterItem } from '.';
 
 function PathFilterItem({ item }: { item: PathFilterItem }) {
@@ -17,17 +18,17 @@ function PathFilterItem({ item }: { item: PathFilterItem }) {
   newParams.delete('q');
 
   return (
-    <li className="mt-2 flex text-black  " key={item.title}>
+    <li className="mt-2 flex text-black" key={item.title}>
       <DynamicTag
         href={createUrl(item.path, newParams)}
         className={clsx(
-          'w-full text-sm underline-offset-4 hover:underline ',
+          'w-full text-[13px] underline-offset-4 hover:bg-[#E09C7F] hover:text-white py-1 px-4 flex justify-between transition-all duration-200',
           {
-            'underline underline-offset-4': active
+            'text-white bg-[#E09C7F]': active
           }
         )}
       >
-        {item.title}
+        {item.title} {active && <span><ChevronRight className="h-4 w-4 text-white" /></span>}
       </DynamicTag>
     </li>
   );

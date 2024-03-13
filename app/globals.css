@@ -41,6 +41,25 @@ body {
   color: #e09c7f;
 }
 
+/* Navbar - Searchbar */
+.search-icon {
+  cursor: pointer;
+  transition: width 0.5s ease;
+}
+
+.search-input {
+  width: 0;
+  visibility: hidden;
+  transition: width 0.5s ease, visibility 0s 0.5s;
+}
+
+.search-input.expanded {
+  width: 100%; /* or any specific width */
+  visibility: visible;
+  transition: width 0.5s ease;
+}
+
+
 /* width */
 ::-webkit-scrollbar {
   width: 5px;

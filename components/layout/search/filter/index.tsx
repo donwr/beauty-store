@@ -15,17 +15,48 @@ function FilterItemList({ list }: { list: ListItem[] }) {
   );
 }
 
+function AlkternateFilterItemList({ list }: { list: ListItem[] }) {
+  return (
+    <div className="flex space-x-4">
+      {list.map((item: ListItem, i) => (
+        <FilterItem key={i} item={item} />
+      ))}
+    </div>
+  );
+}
+
 export default function FilterList({ list, title }: { list: ListItem[]; title?: string }) {
   return (
     <>
       <nav>
         {title ? (
-          <h3 className="hidden text-xs text-neutral-500   md:block">
+          <h3 className="hidden text-xs text-neutral-500 md:block">
             {title}
           </h3>
         ) : null}
         <ul className="hidden md:block">
           <FilterItemList list={list} />
+        </ul>
+        <ul className="md:hidden">
+          <FilterItemDropdown list={list} />
+        </ul>
+      </nav>
+    </>
+  );
+}
+
+
+export function AlternateFilterList({ list, title }: { list: ListItem[]; title?: string }) {
+  return (
+    <>
+      <nav>
+        {/* {title ? (
+          <h3 className="hidden text-xs text-neutral-500 md:block text-right">
+            {title}
+          </h3>
+        ) : null} */}
+        <ul className="hidden md:block">
+          <AlkternateFilterItemList list={list} />
         </ul>
         <ul className="md:hidden">
           <FilterItemDropdown list={list} />

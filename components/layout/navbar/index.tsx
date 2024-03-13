@@ -3,10 +3,10 @@ import Cart from 'components/cart';
 import OpenCart from 'components/cart/open-cart';
 import Link from 'next/link';
 import { Suspense } from 'react';
-import { Heart, Search, User } from 'react-feather';
+import { Heart, User } from 'react-feather';
 import MobileMenu from './mobile-menu';
 import NavbarMenu from './navbar-menu';
-
+import Search from './search';
 
 export default async function Navbar() {
   const menu = await getMenu('next-js-frontend-header-menu');
@@ -26,10 +26,10 @@ export default async function Navbar() {
         </div>
 
         <div className="relative col-span-5 flex items-center justify-end space-x-4 lg:col-span-3">
-          {/* <div className="justify-center md:flex md:w-1/3">
-          <Search />
-        </div> */}
-          <Search className="h-4 w-4" />
+          <div className="flex justify-center">
+            <Search />
+          </div>
+
           <Heart className="h-4 w-4" />
           <Suspense fallback={<OpenCart />}>
             <Cart />
