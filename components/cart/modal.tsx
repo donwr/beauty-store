@@ -62,7 +62,7 @@ export default function CartModal({ cart }: { cart: Cart | undefined }) {
                 {!cart || cart.lines.length === 0 ? (
                   <div className="mt-20 flex w-full flex-col items-center justify-center overflow-hidden">
                     <ShoppingCartIcon className="h-16" />
-                    <p className="mt-6 text-center text-2xl font-bold">Your cart is empty.</p>
+                    <p className="my-6 text-center text-2xl font-bold">Your cart is empty.</p>
                   </div>
                 ) : (
                   <div className="flex h-full flex-col justify-between p-2 space-y-4">
@@ -163,28 +163,7 @@ export default function CartModal({ cart }: { cart: Cart | undefined }) {
                         );
                       })}
                     </ul>
-                    {/* <div className="py-4 text-sm text-neutral-500  ">
-                      <div className="mb-3 flex items-center justify-between border-b border-neutral-200 pb-1  ">
-                        <p>Taxes</p>
-                        <Price
-                          className="text-right text-base text-black "
-                          amount={cart.cost.totalTaxAmount.amount}
-                          currencyCode={cart.cost.totalTaxAmount.currencyCode}
-                        />
-                      </div>
-                      <div className="mb-3 flex items-center justify-between border-b border-neutral-200 pb-1 pt-1  ">
-                        <p>Shipping</p>
-                        <p className="text-right">Calculated at checkout</p>
-                      </div>
-                      <div className="mb-3 flex items-center justify-between border-b border-neutral-200 pb-1 pt-1  ">
-                        <p>Total</p>
-                        <Price
-                          className="text-right text-base text-black "
-                          amount={cart.cost.totalAmount.amount}
-                          currencyCode={cart.cost.totalAmount.currencyCode}
-                        />
-                      </div>
-                    </div> */}
+
                     <div className="options flex justify-between space-x-4">
                       <a
                         href={cart.checkoutUrl}
@@ -240,7 +219,7 @@ export default function CartModal({ cart }: { cart: Cart | undefined }) {
                       {!cart || cart.lines.length === 0 ? (
                         <div className="mt-20 flex w-full flex-col items-center justify-center overflow-hidden">
                           <ShoppingCartIcon className="h-16" />
-                          <p className="mt-6 text-center text-2xl font-bold">Your cart is empty.</p>
+                          <p className="my-6 text-center text-2xl font-bold">Your cart is empty.</p>
                         </div>
                       ) : (
                         <div className="flex h-full flex-col justify-between overflow-hidden p-1">
