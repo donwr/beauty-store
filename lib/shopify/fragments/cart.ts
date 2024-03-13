@@ -40,6 +40,14 @@ const cartFragment = /* GraphQL */ `
               product {
                 ...product
               }
+              priceV2 {
+                amount
+                currencyCode
+              }
+              compareAtPriceV2 {
+                amount
+                currencyCode
+              }
             }
           }
         }

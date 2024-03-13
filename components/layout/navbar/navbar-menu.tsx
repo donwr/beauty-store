@@ -2,6 +2,7 @@
 import AnimatedDropdownWrapper from '@/components/layout/navbar/menus/animate-dropdown-wrapper'; // Adjust the import path accordingly
 import { useDropdown } from '@/context/dropdown-context';
 import { useEffect } from 'react';
+import { AccessoriesDropdown } from './menus/accessories-dropdown';
 import { ClothingDropdown } from './menus/clothing-dropdown';
 import GiftsDropdown from './menus/gifts-dropdown';
 import { NewInDropdown } from './menus/new-in-dropdown';
@@ -18,6 +19,7 @@ const NavbarMenu = () => {
     registerComponent('CLOTHING', <ClothingDropdown />);
     registerComponent('GIFTS', <GiftsDropdown />);
     registerComponent('SHOES', <ShoesDropdown />);
+    registerComponent('ACCESSORIES', <AccessoriesDropdown />);
   }, [registerComponent]);
 
   const menuOptions = [
@@ -33,7 +35,7 @@ const NavbarMenu = () => {
   return (
     <ul className="relative flex w-full justify-center space-x-4 text-sm">
       {menuOptions.map((item) => (
-        <li key={item} className="group  text-xs">
+        <li key={item} className="group text-xs">
           <button onClick={() => toggleDropdown(item)} className="focus:outline-none cursor-pointer">
             {item}
           </button>

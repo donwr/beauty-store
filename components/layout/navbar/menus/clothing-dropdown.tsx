@@ -3,14 +3,14 @@ import { clothingDropdownCategories, clothingDropdownSeasons } from '@/data/menu
 export const ClothingDropdown = () => {
   return (
     <div className="flex h-[36rem] w-full flex-col">
-      <div className="first overflow-hidden bg-white px-8 py-4">
+      <div className="overflow-hidden bg-white px-8 py-4">
         <div className="relative h-[12.5rem] w-full overflow-hidden bg-gradient-to-br from-[#C5C8D1] to-[#C3C7D6] p-4">
           <p className="text-lg font-semibold italic tracking-widest text-black">
             / Autumn Sale
           </p>
           <p className="leading-[3rem] text-8xl font-bold italic text-gray-400/50">warmth</p>
           <p className="text-xs pt-6">Up to 50% discount with “SEASON2021” promocode </p>
-          {/* Ellipse */}
+     
           <img
             src="/images/shoes-dropdown-ellipse-02.png"
             alt=""
@@ -19,7 +19,7 @@ export const ClothingDropdown = () => {
           <img src="/images/clothing-dropdown-sample.png" alt="" className="absolute right-0 top-0" />
         </div>
       </div>
-      {/* This div now takes up the remaining space */}
+
       <div className="flex h-full bg-white">
         <div className="left flex h-full w-1/2 flex-col border-r border-neutral-100 p-8 ">
           <h4 className="mb-4 text-sm font-semibold uppercase text-black">categories</h4>
@@ -36,13 +36,13 @@ export const ClothingDropdown = () => {
           </div>
         </div>
         <div className="right h-full w-1/2 flex-col p-8">
-          <h4 className="mb-4 text-sm font-semibold uppercase text-black">brands</h4>
+          <h4 className="mb-4 text-sm font-semibold uppercase text-black">shop seasons</h4>
           <div className="flex flex-col space-y-4">
             {clothingDropdownSeasons.map((season, index) => {
               return (
                 <div
                   key={index}
-                  className="brand h-[4rem] w-full flex items-center bg-[#FAFAFA]"
+                  className="h-[4rem] w-full flex items-center bg-[#FAFAFA] hover:bg-[#d8d8d8] transition-all duration-300 cursor pointer"
                 >
                   <img src={season.image} alt={season.alt} className="h-full w-auto object-cover" />
                   <div className="content flex justify-center items-center w-full">

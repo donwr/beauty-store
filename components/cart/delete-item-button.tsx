@@ -1,11 +1,11 @@
 'use client';
 
-import { XMarkIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 import { removeItem } from 'components/cart/actions';
 import LoadingDots from 'components/loading-dots';
 import type { CartItem } from 'lib/shopify/types';
 import { useFormState, useFormStatus } from 'react-dom';
+import { Trash2 } from 'react-feather';
 
 function SubmitButton() {
   const { pending } = useFormStatus();
@@ -19,7 +19,7 @@ function SubmitButton() {
       aria-label="Remove cart item"
       aria-disabled={pending}
       className={clsx(
-        'ease flex h-[17px] w-[17px] items-center justify-center rounded-full bg-neutral-500 transition-all duration-200',
+        'ease flex items-center justify-center  transition-all duration-200',
         {
           'cursor-not-allowed px-0': pending
         }
@@ -28,7 +28,7 @@ function SubmitButton() {
       {pending ? (
         <LoadingDots className="bg-white" />
       ) : (
-        <XMarkIcon className="hover:text-accent-3 mx-[1px] h-4 w-4 text-white " />
+        <Trash2 className=" mx-[1px] h-4 w-4 text-black " />
       )}
     </button>
   );

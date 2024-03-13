@@ -25,7 +25,7 @@ export default async function Navbar() {
           <NavbarMenu />
         </div>
 
-        <div className="col-span-5 flex items-center justify-end space-x-4 lg:col-span-3">
+        <div className="relative col-span-5 flex items-center justify-end space-x-4 lg:col-span-3">
           {/* <div className="justify-center md:flex md:w-1/3">
           <Search />
         </div> */}

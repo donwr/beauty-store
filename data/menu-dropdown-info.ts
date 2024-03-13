@@ -266,3 +266,78 @@ export const clothingDropdownSeasons = [
     link: '/search/autumn'
   },
 ];
+
+
+export const accessoryDropdownCategories = [
+  {
+    text: 'View all',
+    link: '/search/sale'
+  },
+  {
+    text: 'Sunglasses',
+    link: '/search/sale'
+  },
+  {
+    text: 'New In',
+    link: '/search/sale'
+  },
+  {
+    text: 'Bags & Purses',
+    link: '/search/sale'
+  },
+  {
+    text: 'Face coverings',
+    link: '/search/sale'
+  },
+  {
+    text: 'Gifts',
+    link: '/search/sale'
+  },
+  {
+    text: 'Hair accessories',
+    link: '/search/sale'
+  },
+  {
+    text: 'Hats',
+    link: '/search/sale'
+  },
+  {
+    text: 'Jewellery',
+    link: '/search/sale'
+  },
+  {
+    text: 'Scarves',
+    link: '/search/sale'
+  },
+  {
+    text: 'Socks & Tights',
+    link: '/search/sale'
+  }
+]
+
+export const accessoryDropdownSeasons = [
+  {
+    image: '/images/accessory-dropdown-season-01.png',
+    alt: 'winter',
+    text: 'Winter',
+    link: '/search/winter'
+  },
+  {
+    image: '/images/accessory-dropdown-season-02.png',
+    alt: 'Spring',
+    text: 'Spring',
+    link: '/search/spring'
+  },
+  {
+    image: '/images/accessory-dropdown-season-03.png',
+    alt: 'Summer',
+    text: 'Summer',
+    link: '/search/summer'
+  },
+  {
+    image: '/images/accessory-dropdown-season-04.png',
+    alt: 'Autumn',
+    text: 'Autumn',
+    link: '/search/autumn'
+  },
+];
