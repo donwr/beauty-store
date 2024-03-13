@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 export const SaleDropdown = () => {
   return (
-    <div className="h-[75vh] w-full flex flex-col">
+    <div className="h-[80vh] w-full flex flex-col">
       <div className="relative flex h-[11rem] overflow-hidden border border-neutral-50 bg-[#FCF7F5]">
         {/* Background SVGs */}
         <img src="/images/sale.png" alt="" className="absolute left-0 top-0 h-[15rem] w-[15rem]" />
@@ -51,7 +51,7 @@ export const SaleDropdown = () => {
             </div>
           </div>
         </div>
-        <div className="right h-full w-1/2 flex-col p-8">
+        <div className="right h-full w-1/2 flex-col py-8 pr-4">
           <h4 className="mb-4 text-sm font-semibold uppercase text-black">categories</h4>
           {/* New element with categories in an auto-sizing grid layout */}
           <div className="grid grid-cols-2 gap-4 overflow-y-auto">
@@ -62,7 +62,7 @@ export const SaleDropdown = () => {
                   className="category-option flex items-center space-x-4 border-2 border-neutral-50 px-4 py-4"
                 >
                   <img src={category.image} alt={category.alt} className="h-8 w-8 object-cover" />
-                  <p className="text-sm">{category.text}</p>
+                  <p className="text-[14px]">{category.text}</p>
                 </motion.div>
               );
             })}

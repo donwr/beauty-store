@@ -6,7 +6,7 @@ import { Suspense } from 'react';
 import { Heart, Search, User } from 'react-feather';
 import MobileMenu from './mobile-menu';
 import NavbarMenu from './navbar-menu';
-const menuOptions = ['SALE', 'NEW IN', 'CLOTHING', 'SHOES', 'ACCESSORIES', 'GIFTS', 'COLLECTIONS'];
+
 
 export default async function Navbar() {
   const menu = await getMenu('next-js-frontend-header-menu');

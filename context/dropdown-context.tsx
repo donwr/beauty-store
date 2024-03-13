@@ -6,7 +6,6 @@ import {
   createContext,
   useCallback,
   useContext,
-  useEffect,
   useState
 } from 'react';
 
@@ -22,7 +21,6 @@ type DropdownContextType = {
   registerComponent: (dropdownName: string, component: ReactNode) => void;
   getComponentForDropdown: (dropdownName: string) => ReactNode | null;
   isOverlayVisible: boolean;
-  registerDropdownRef: (dropdownName: string, node: HTMLDivElement) => void;
 };
 
 const DropdownContext = createContext<DropdownContextType | undefined>(undefined);
@@ -43,7 +41,6 @@ export const DropdownProvider: FunctionComponent<DropdownProviderProps> = ({ chi
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [components, setComponents] = useState<ComponentMapping>({});
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
-  const [dropdownRefs, setDropdownRefs] = useState<Map<string, HTMLDivElement>>(new Map());
 
   const toggleDropdown = useCallback((dropdownName: string | null) => {
     setOpenDropdown((currentDropdown) => {
@@ -66,31 +63,6 @@ export const DropdownProvider: FunctionComponent<DropdownProviderProps> = ({ chi
     (dropdownName: string): ReactNode | null => components[dropdownName] || null,
     [components]
   );
-
-  const registerDropdownRef = useCallback((dropdownName: string, node: HTMLDivElement) => {
-    setDropdownRefs((prevRefs) => new Map(prevRefs).set(dropdownName, node));
-  }, []);
-  
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (openDropdown) {
-        // TypeScript should now understand openDropdown is a string within this block,
-        // but if you're still getting an error, you can use a type assertion:
-        const currentDropdownRef = dropdownRefs.get(openDropdown as string);
-      
-        if (currentDropdownRef && !currentDropdownRef.contains(event.target as Node)) {
-          setOpenDropdown(null);
-          setIsOverlayVisible(false);
-        }
-      }
-      
-    };
-  
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [openDropdown, dropdownRefs]);
-  
-
   return (
     <DropdownContext.Provider
       value={{
@@ -99,7 +71,6 @@ export const DropdownProvider: FunctionComponent<DropdownProviderProps> = ({ chi
         registerComponent,
         getComponentForDropdown,
         isOverlayVisible,
-        registerDropdownRef
       }}
     >
       {children}

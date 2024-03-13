@@ -1,11 +1,12 @@
 'use client';
 import AnimatedDropdownWrapper from '@/components/layout/navbar/menus/animate-dropdown-wrapper'; // Adjust the import path accordingly
 import { useDropdown } from '@/context/dropdown-context';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { ClothingDropdown } from './menus/clothing-dropdown';
 import GiftsDropdown from './menus/gifts-dropdown';
 import { NewInDropdown } from './menus/new-in-dropdown';
 import { SaleDropdown } from './menus/sale-dropdown';
+import { ShoesDropdown } from './menus/shoes-dropdown';
 
 const NavbarMenu = () => {
   const { registerComponent, toggleDropdown, isDropdownOpen, getComponentForDropdown } =
@@ -16,24 +17,8 @@ const NavbarMenu = () => {
     registerComponent('NEW IN', <NewInDropdown />);
     registerComponent('CLOTHING', <ClothingDropdown />);
     registerComponent('GIFTS', <GiftsDropdown />);
+    registerComponent('SHOES', <ShoesDropdown />);
   }, [registerComponent]);
-
-  const navbarRef = useRef<HTMLUListElement>(null);
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (navbarRef.current && !navbarRef.current.contains(event.target as Node)) {
-        // Your logic to close the dropdown
-      }
-    };
-
-    // Attach event listener
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      // Clean up event listener
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []); // Dependencies might include functions from your context if they are expected to change
 
   const menuOptions = [
     'SALE',
@@ -46,11 +31,13 @@ const NavbarMenu = () => {
   ];
 
   return (
-    <ul ref={navbarRef} className="relative flex w-full justify-center space-x-4 text-sm">
+    <ul className="relative flex w-full justify-center space-x-4 text-sm">
       {menuOptions.map((item) => (
-        <li className="cursor-pointer text-xs" key={item} onClick={() => toggleDropdown(item)}>
-          {item}
-          <AnimatedDropdownWrapper isVisible={isDropdownOpen(item)}>
+        <li key={item} className="group  text-xs">
+          <button onClick={() => toggleDropdown(item)} className="focus:outline-none cursor-pointer">
+            {item}
+          </button>
+          <AnimatedDropdownWrapper isVisible={isDropdownOpen(item)} name={item}>
             {getComponentForDropdown(item)}
           </AnimatedDropdownWrapper>
         </li>
