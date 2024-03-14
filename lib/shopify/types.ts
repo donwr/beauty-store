@@ -41,6 +41,26 @@ export type Image = {
   width: number;
   height: number;
 };
+export type LikedItem = {
+  id: string;
+  title: string;
+  handle: string;
+  descriptionHtml: string;
+  images: [
+    {
+      node: {
+        src: string;
+        altText?: string | null;
+      };
+    }
+  ];
+  priceRange: {
+    minVariantPrice: {
+      amount: string;
+      currencyCode: string;
+    };
+  };
+};
 
 export type Menu = {
   title: string;

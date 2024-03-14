@@ -1,22 +1,12 @@
-"use client";
-import { useLikedProducts } from '@/context/liked-product-context';
-import clsx from 'clsx';
+// components/likes/OpenLikes.js or .tsx
 import { Heart } from 'react-feather';
+import LikesCount from './likes-count'; // Make sure to import the new component
 
-export default function OpenLikes({
-  className,
-}: {
-  className?: string;
-}) {
-  const { likedProducts } = useLikedProducts();
+export default function OpenLikes({ className }: { className?: string }) {
   return (
     <div className="relative flex items-center justify-center">
-      <Heart className={clsx('h-4 text-black hover:scale-110', className)} />
-      {likedProducts.length ? (
-        <div className="absolute right-0 top-0 -mr-2 -mt-2 h-4 w-4 rounded bg-[#F4A482] text-[11px] font-medium text-white">
-          {likedProducts.length}
-        </div>
-      ) : null}
+      <Heart className="h-4 text-black hover:scale-110" />
+      <LikesCount />
     </div>
   );
 }

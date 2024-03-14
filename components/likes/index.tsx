@@ -1,4 +1,4 @@
-import { Product } from 'lib/shopify/types';
+import { LikedItem } from 'lib/shopify/types';
 import { cookies } from 'next/headers';
 import LikedProductsModal from './modal';
 
@@ -8,7 +8,7 @@ const Liked = async () => {
   const likedProductHandlesString = cookies().get('likedProducts')?.value;
   console.log('Liked Product Handles String:', likedProductHandlesString);
 
-  let products: Product[] = [];
+  let products: LikedItem[] = [];
   
   if (likedProductHandlesString) {
     const likedProductIds: string[] = JSON.parse(likedProductHandlesString);

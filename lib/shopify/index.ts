@@ -29,8 +29,8 @@ import {
   Collection,
   Connection,
   Image,
+  LikedItem,
   Menu,
-  Node,
   Page,
   Product,
   ShopifyAddToCartOperation,
@@ -256,7 +256,7 @@ export async function updateCart(
   return reshapeCart(res.body.data.cartLinesUpdate.cart);
 }
 
-export async function fetchProductsByIds(ids: string[]): Promise<Product[]> {
+export async function fetchProductsByIds(ids: string[]): Promise<LikedItem[]> {
   const response = await fetch(endpoint, {
     method: 'POST',
     headers: {
@@ -275,25 +275,22 @@ export async function fetchProductsByIds(ids: string[]): Promise<Product[]> {
 
   const { data } = await response.json();
 
-  const products = data.nodes.map((node: Node) => {
-    // Destructure images from node, ensuring we provide a default structure for safe access
-    const { images = { edges: [] }, ...rest } = node;
-  
-    // Attempt to get the first image, if available
-    const firstImage = images.edges[0]?.node;
-  
+  // Map the received data to your LikedItem type
+  const likedItems = data.nodes.map((node: any) => {
+    // Handle the transformation for images
+    const firstImage = node.images.edges.length > 0 ? node.images.edges[0].node : null;
+    
     return {
-      ...rest,
-      // If firstImage exists, use it, otherwise default to null
-      image: firstImage ? {
-        src: firstImage.src, // src should always be present
-        altText: firstImage.altText ?? 'Default alt text', // Provide a default or handle as you see fit
-      } : null,
+      id: node.id,
+      title: node.title,
+      handle: node.handle,
+      descriptionHtml: node.descriptionHtml,
+      images: firstImage ? [{ node: firstImage }] : [], // Adjust the structure to fit your component's needs
+      priceRange: node.priceRange,
     };
   });
-  
 
-  return products;
+  return likedItems;
 }
 
 
