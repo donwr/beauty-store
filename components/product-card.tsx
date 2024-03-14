@@ -1,4 +1,5 @@
 import { Product } from '@/lib/shopify/types';
+import Link from 'next/link';
 import React, { useState } from 'react';
 import { Heart } from 'react-feather';
 
@@ -33,7 +34,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     : null;
 
   return (
-    <div className="product-card space-y-2">
+    <Link href={`/product/${product.handle}`} className="product-card space-y-2">
       <div className="relative h-[15rem] w-full overflow-hidden">
         <img
           src={product.featuredImage.url}
@@ -53,7 +54,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         {compareAtPrice && <span className="line-through">{compareAtPrice}</span>}{' '}
         <span className="font-semibold text-[#F4A482]">{price}</span>
       </div>
-    </div>
+    </Link>
   );
 };
 
