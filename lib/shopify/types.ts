@@ -52,6 +52,27 @@ export type Money = {
   currencyCode: string;
 };
 
+export type Node = {
+  id: string;
+  title: string;
+  handle: string;
+  descriptionHtml: string;
+  images: {
+    edges: Array<{
+      node: {
+        src: string;
+        altText?: string;
+      };
+    }>;
+  };
+  priceRange: {
+    minVariantPrice: {
+      amount: string;
+      currencyCode: string;
+    };
+  };
+};
+
 export type Page = {
   id: string;
   title: string;

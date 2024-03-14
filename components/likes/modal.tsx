@@ -1,75 +1,49 @@
 'use client';
 import { useWindowSize } from '@/hooks/window-resizes';
-import { Dialog, Transition } from '@headlessui/react';
-import { ShoppingCartIcon } from '@heroicons/react/24/outline';
-import Price from 'components/price';
-import { DEFAULT_OPTION } from 'lib/constants';
-import type { Cart } from 'lib/shopify/types';
-import { createUrl } from 'lib/utils';
-import Image from 'next/image';
-import Link from 'next/link';
-import { Fragment, useEffect, useRef, useState } from 'react';
-import CloseCart from './close-cart';
-import { DeleteItemButton } from './delete-item-button';
-import { EditItemQuantityButton } from './edit-item-quantity-button';
-import OpenCart from './open-cart';
+import type { Product } from 'lib/shopify/types';
+import { useState } from 'react';
+import OpenLikes from './open-likes';
 
-type MerchandiseSearchParams = {
-  [key: string]: string;
-};
-
-export default function CartModal({ cart }: { cart: Cart | undefined }) {
+export default function LikedProductsModal({ products }: { products: Product[] }) {
   const [isOpen, setIsOpen] = useState(false);
-  const quantityRef = useRef(cart?.totalQuantity);
-  const openCart = () => setIsOpen(true);
-  const closeCart = () => setIsOpen(false);
+  const openModal = () => setIsOpen(true);
+  const closeModal = () => setIsOpen(false);
   const [width] = useWindowSize();
+  const isDesktop = width >= 768;
 
-  const isDesktop = width >= 768; // TailwindCSS md breakpoint
-
-  useEffect(() => {
-    // Open cart modal when quantity changes.
-    if (cart?.totalQuantity !== quantityRef.current) {
-      // But only if it's not already open (quantity also changes when editing items in cart).
-      if (!isOpen) {
-        setIsOpen(true);
-      }
-
-      // Always update the quantity reference
-      quantityRef.current = cart?.totalQuantity;
-    }
-  }, [isOpen, cart?.totalQuantity, quantityRef]);
-
+  console.log(products);
   return (
     <>
-      <button aria-label="Open cart" onClick={openCart}>
-        <OpenCart quantity={cart?.totalQuantity} />
+      <button onClick={openModal} aria-label="Open liked products">
+        <OpenLikes className="h-4 text-black hover:scale-110" />
       </button>
+
       {isOpen && (
         <>
           {isDesktop ? (
             // Desktop Modal
             <div className={`absolute right-0 top-12 z-50 ${isDesktop ? 'block' : 'hidden'}`}>
-              <div className="h-full max-h-[40rem] w-[400px] overflow-auto bg-white px-4 py-6 shadow-xl">
+              {/* <div className="h-full max-h-[40rem] w-[400px] overflow-auto bg-white px-4 py-6 shadow-xl">
                 <div className="flex items-center justify-between">
                   <p className="text-sm font-semibold uppercase">My Cart</p>
 
-                  <button aria-label="Close cart" onClick={closeCart}>
-                    <CloseCart />
+                  <button aria-label="Close cart" onClick={closeModal}>
+                    
                   </button>
                 </div>
 
-                {!cart || cart.lines.length === 0 ? (
+                {!products ? (
                   <div className="mt-20 flex w-full flex-col items-center justify-center overflow-hidden">
-                    <ShoppingCartIcon className="h-16" />
-                    <p className="my-6 text-center text-2xl font-bold">Your cart is empty.</p>
+                    <Heart className="h-16" />
+                    <p className="my-6 text-center text-2xl font-bold"> You haven&apos;t liked any items yet.</p>
                   </div>
                 ) : (
-                  <div className="flex h-full flex-col justify-between p-2 space-y-4">
-                    <ul className="flex-grow py-4 max-h-[22rem] overflow-y-scroll px-2">
-                      {cart.lines.map((item, i) => {
-                        const compareAtPrice = item.merchandise.compareAtPriceV2;
-                        const sizeOption = item.merchandise.selectedOptions.find(
+                  <div className="flex h-full flex-col justify-between space-y-4 p-2">
+                    <ul className="max-h-[22rem] flex-grow overflow-y-scroll px-2 py-4">
+                      {products.map((product, i) => {
+                        const compareAtPrice = product.variants[0]?.compareAtPriceV2;
+                        
+                        const sizeOption = product.merchandise.selectedOptions.find(
                           (option) => option.name === 'Size'
                         );
                         const colorOption = item.merchandise.selectedOptions.find(
@@ -150,7 +124,7 @@ export default function CartModal({ cart }: { cart: Cart | undefined }) {
                                     </div>
                                     <div className="ml-auto flex h-9 flex-row items-center  ">
                                       <EditItemQuantityButton item={item} type="minus" />
-                                      <p className=" text-center relative">
+                                      <p className=" relative text-center">
                                         <span className="w-full text-xs">{item.quantity}</span>
                                       </p>
                                       <EditItemQuantityButton item={item} type="plus" />
@@ -180,12 +154,12 @@ export default function CartModal({ cart }: { cart: Cart | undefined }) {
                     </div>
                   </div>
                 )}
-              </div>
+              </div> */}
             </div>
           ) : (
             // Mobile Modal
             <div className="fixed inset-0 z-[1001] flex items-center justify-center">
-              <Transition show={true} as={Fragment}>
+              {/* <Transition show={true} as={Fragment}>
                 <Dialog as="div" className="relative z-[1001]" onClose={closeCart}>
                   <Transition.Child
                     as={Fragment}
@@ -328,7 +302,7 @@ export default function CartModal({ cart }: { cart: Cart | undefined }) {
                     </Dialog.Panel>
                   </Transition.Child>
                 </Dialog>
-              </Transition>
+              </Transition> */}
             </div>
           )}
         </>

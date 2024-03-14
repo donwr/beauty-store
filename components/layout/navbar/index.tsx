@@ -1,9 +1,11 @@
+import Liked from '@/components/likes';
+import OpenLikes from '@/components/likes/open-likes';
 import { getMenu } from '@/lib/shopify';
 import Cart from 'components/cart';
 import OpenCart from 'components/cart/open-cart';
 import Link from 'next/link';
 import { Suspense } from 'react';
-import { Heart, User } from 'react-feather';
+import { User } from 'react-feather';
 import MobileMenu from './mobile-menu';
 import NavbarMenu from './navbar-menu';
 import Search from './search';
@@ -30,7 +32,9 @@ export default async function Navbar() {
             <Search />
           </div>
 
-          <Heart className="h-4 w-4" />
+          <Suspense fallback={<OpenLikes />}>
+            <Liked />
+          </Suspense>
           <Suspense fallback={<OpenCart />}>
             <Cart />
           </Suspense>

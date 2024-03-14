@@ -1,18 +1,13 @@
 import { Product } from '@/lib/shopify/types';
 import Link from 'next/link';
-import React, { useState } from 'react';
-import { Heart } from 'react-feather';
+import React from 'react';
+import HeartButton from './likes/heart-button';
 
 interface ProductCardProps {
   product: Product;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-  const [isLiked, setIsLiked] = useState(false);
-
-  // Function to toggle liked state
-  const toggleLike = () => setIsLiked(!isLiked);
-
   // Assuming you're interested in the first variant's pricing details
   const firstVariant = product.variants[0];
 
@@ -34,27 +29,24 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     : null;
 
   return (
-    <Link href={`/product/${product.handle}`} className="product-card space-y-2">
-      <div className="relative h-[15rem] w-full overflow-hidden">
-        <img
-          src={product.featuredImage.url}
-          alt={product.title || 'Product Image'}
-          className="absolute left-0 top-0 h-full w-full object-cover object-center transition-transform duration-300 hover:scale-110" // Adjust the scale
-        />
-        <Heart
-          onClick={toggleLike}
-          className={`heart-icon absolute right-4 top-4 h-5 w-5 text-white hover:text-[#e09c7f] ${
-            isLiked ? 'filled-icon' : ''
-          }`}
-        />
-      </div>
-      <h3 className="text-sm">{product.title}</h3>
+    <div className="relative">
+      <Link href={`/product/${product.handle}`} className="product-card space-y-2">
+        <div className="relative h-[15rem] w-full overflow-hidden">
+          <img
+            src={product.featuredImage.url}
+            alt={product.title || 'Product Image'}
+            className="absolute left-0 top-0 h-full w-full object-cover object-center transition-transform duration-300 hover:scale-110" 
+          />
+        </div>
+        <h3 className="text-sm">{product.title}</h3>
 
-      <div className="space-x-2 text-sm">
-        {compareAtPrice && <span className="line-through">{compareAtPrice}</span>}{' '}
-        <span className="font-semibold text-[#F4A482]">{price}</span>
-      </div>
-    </Link>
+        <div className="space-x-2 text-sm">
+          {compareAtPrice && <span className="line-through">{compareAtPrice}</span>}{' '}
+          <span className="font-semibold text-[#F4A482]">{price}</span>
+        </div>
+      </Link>
+      <HeartButton productId={product.id} className="absolute top-4 right-4" />
+    </div>
   );
 };
 

@@ -19,6 +19,7 @@ import {
 import { getMenuQuery } from './queries/menu';
 import { getPageQuery, getPagesQuery } from './queries/page';
 import {
+  getNodesByIdsQuery,
   getProductQuery,
   getProductRecommendationsQuery,
   getProductsQuery
@@ -29,6 +30,7 @@ import {
   Connection,
   Image,
   Menu,
+  Node,
   Page,
   Product,
   ShopifyAddToCartOperation,
@@ -254,6 +256,47 @@ export async function updateCart(
   return reshapeCart(res.body.data.cartLinesUpdate.cart);
 }
 
+export async function fetchProductsByIds(ids: string[]): Promise<Product[]> {
+  const response = await fetch(endpoint, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Shopify-Storefront-Access-Token': key,
+    },
+    body: JSON.stringify({
+      query: getNodesByIdsQuery,
+      variables: { ids },
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch products by IDs: ${response.statusText}`);
+  }
+
+  const { data } = await response.json();
+
+  const products = data.nodes.map((node: Node) => {
+    // Destructure images from node, ensuring we provide a default structure for safe access
+    const { images = { edges: [] }, ...rest } = node;
+  
+    // Attempt to get the first image, if available
+    const firstImage = images.edges[0]?.node;
+  
+    return {
+      ...rest,
+      // If firstImage exists, use it, otherwise default to null
+      image: firstImage ? {
+        src: firstImage.src, // src should always be present
+        altText: firstImage.altText ?? 'Default alt text', // Provide a default or handle as you see fit
+      } : null,
+    };
+  });
+  
+
+  return products;
+}
+
+
 export async function getCart(cartId: string): Promise<Cart | undefined> {
   const res = await shopifyFetch<ShopifyCartOperation>({
     query: getCartQuery,
@@ -337,6 +380,7 @@ export async function getCollections(): Promise<Collection[]> {
   return collections;
 }
 
+
 export async function getMenu(handle: string): Promise<Menu[]> {
   const res = await shopifyFetch<ShopifyMenuOperation>({
     query: getMenuQuery,
@@ -416,6 +460,8 @@ export async function getProducts({
 
   return reshapeProducts(removeEdgesAndNodes(res.body.data.products));
 }
+
+
 
 // This is called from `app/api/revalidate.ts` so providers can control revalidation logic.
 export async function revalidate(req: NextRequest): Promise<NextResponse> {

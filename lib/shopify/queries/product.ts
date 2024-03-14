@@ -30,3 +30,48 @@ export const getProductRecommendationsQuery = /* GraphQL */ `
   }
   ${productFragment}
 `;
+
+export const getLikedProductsQuery = /* GraphQL */ `
+  query getLikedProducts($query: String!) {
+    products(first: 250, query: $query) {
+      edges {
+        node {
+          id
+          handle
+          title
+          // Add any other fields you need
+        }
+      }
+    }
+  }  
+  ${productFragment}
+`;
+
+
+// Add this query definition near your other GraphQL queries
+export const getNodesByIdsQuery = /* GraphQL */ `
+  query getNodesByIds($ids: [ID!]!) {
+    nodes(ids: $ids) {
+      ... on Product {
+        id
+        title
+        handle
+        descriptionHtml
+        images(first: 1) {
+          edges {
+            node {
+              src
+              altText
+            }
+          }
+        }
+        priceRange {
+          minVariantPrice {
+            amount
+            currencyCode
+          }
+        }
+      }
+    }
+  }
+`;

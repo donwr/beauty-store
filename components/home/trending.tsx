@@ -48,7 +48,7 @@ const Trending: React.FC<TrendingProps> = ({ allTrendingItems }) => {
             <button
               key={category}
               onClick={() => setSelectedCategory(category)}
-              className={`rounded-full border border-[#7E7B77] text-sm tracking-tight px-4 py-2 ${
+              className={`rounded-full border border-[#7E7B77] text-sm tracking-tight px-4 py-2 hover:bg-[#E08C7F] hover:text-white hover:border-[#E09C7F] transition-all duration-200 ${
                 selectedCategory === category ? 'bg-[#E09C7F] text-white border-none' : 'bg-transparent text-[#7E7B77]'
               }`}
             >
