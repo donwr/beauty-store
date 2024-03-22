@@ -341,3 +341,50 @@ export const accessoryDropdownSeasons = [
     link: '/search/autumn'
   },
 ];
+
+
+export const newInDropdownCategories = [
+  {
+    text: 'View all',
+    link: '/search/sale'
+  },
+  {
+    text: 'Sunglasses',
+    link: '/search/sale'
+  },
+  {
+    text: 'Bags & Purses',
+    link: '/search/sale'
+  },
+  {
+    text: 'Dresses',
+    link: '/search/sale'
+  },
+  {
+    text: 'Jackets',
+    link: '/search/sale'
+  },
+  {
+    text: 'Tops / Bodysuits',
+    link: '/search/sale'
+  },
+  {
+    text: 'Jeans',
+    link: '/search/sale'
+  },
+]
+
+export const newInDropdownSeasons = [
+  {
+    image: '/images/accessory-dropdown-season-02.png',
+    alt: 'Spring',
+    text: 'Spring',
+    link: '/search/spring'
+  },
+  {
+    image: '/images/accessory-dropdown-season-03.png',
+    alt: 'Summer',
+    text: 'Summer',
+    link: '/search/summer'
+  },
+];

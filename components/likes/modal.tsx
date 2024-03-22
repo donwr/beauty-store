@@ -1,21 +1,21 @@
 'use client';
+import { useLikedProducts } from '@/context/liked-product-context';
 import { useWindowSize } from '@/hooks/window-resizes';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
-import type { LikedItem } from 'lib/shopify/types';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import OpenLikes from './open-likes';
 
-export default function LikedProductsModal({ products }: { products: LikedItem[] }) {
+export default function LikedProductsModal() {
   const [isOpen, setIsOpen] = useState(false);
   const openModal = () => setIsOpen(true);
   const closeModal = () => setIsOpen(false);
   const [width] = useWindowSize();
   const isDesktop = width >= 768;
+  const {likedProducts} = useLikedProducts();
 
-  console.log(products);
   return (
     <>
       <button onClick={openModal} aria-label="Open liked products">
@@ -41,13 +41,13 @@ export default function LikedProductsModal({ products }: { products: LikedItem[]
                   </button>
                 </div>
 
-                {products.length === 0 ? (
+                {!likedProducts || likedProducts.length ==  0 ? (
                   <div className="flex flex-col items-center justify-center p-10">
                     <p>Your list of liked items is empty.</p>
                   </div>
                 ) : (
                   <ul>
-                    {products.map((product) => (
+                    {likedProducts && likedProducts.map((product) => (
                       <li key={product.id} className="border-b border-gray-200 p-4">
                         <div className="flex space-x-4">
                           <div className="w-20 flex-none">

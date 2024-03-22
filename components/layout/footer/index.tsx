@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
 const footerData = [
@@ -56,10 +57,80 @@ const Footer = () => {
               </div>
             ))}
           </div>
+          <div className="icons mt-8 flex space-x-48 items-center">
+            <div className="socials flex space-x-4">
+              <Link href="">
+                <Image
+                  src="/images/icons/ig.svg"
+                  height={22}
+                  width={22}
+                  className=""
+                  alt="instagram logo"
+                />
+              </Link>
+              <Link href="">
+                <Image
+                  src="/images/icons/fb.svg"
+                  height={22}
+                  width={22}
+                  className=""
+                  alt="instagram logo"
+                />
+              </Link>
+              <Link href="">
+                <Image
+                  src="/images/icons/pinterest.svg"
+                  height={22}
+                  width={22}
+                  className=""
+                  alt="instagram logo"
+                />
+              </Link>
+              <Link href="">
+                <Image
+                  src="/images/icons/twitter.svg"
+                  height={22}
+                  width={22}
+                  className=""
+                  alt="instagram logo"
+                />
+              </Link>
+            </div>
+            <div className="payment-cards flex space-x-4">
+              <Image
+                src="/images/icons/visa.svg"
+                height={30}
+                width={46}
+                className=""
+                alt="instagram logo"
+              />
+              <Image
+                src="/images/icons/mastercard.svg"
+                height={30}
+                width={46}
+                className=""
+                alt="instagram logo"
+              />
+              <Image
+                src="/images/icons/paypal.svg"
+                height={30}
+                width={46}
+                className=""
+                alt="instagram logo"
+              />
+              <Image
+                src="/images/icons/american-experess.svg"
+                height={30}
+                width={46}
+                className=""
+                alt="instagram logo"
+              />
+            </div>
+          </div>
         </div>
       </div>
       <div className="bottom w-full bg-[#F7F4F2]">
-        <div className="bottom-wrapper mx-auto max-w-[85.25rem] px-4 flex justify-between py-4">
+        <div className="bottom-wrapper mx-auto flex max-w-[85.25rem] justify-between px-4 py-4">
           <p className="text-xs text-[#7E7B77]">Ⓒ 2021 lOOMI</p>
           <div className="links flex space-x-4">
             <Link href="" className="text-xs text-[#E09C7F]">

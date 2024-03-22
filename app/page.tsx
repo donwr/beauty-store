@@ -3,6 +3,8 @@ import { Categories } from '@/components/home/categories';
 import { Discount } from '@/components/home/discount';
 import { Info } from '@/components/home/info';
 import { NewArrival } from '@/components/home/new-arrival';
+import Footer from '@/components/layout/footer';
+import Navbar from '@/components/layout/navbar';
 import { Hero } from 'components/home/hero';
 import { getCollectionProducts } from 'lib/shopify';
 import dynamic from 'next/dynamic';
@@ -24,6 +26,7 @@ export default async function HomePage() {
 
   return (
     <>
+      <Navbar />
       <Hero />
       <TrendingWithNoSSR allTrendingItems={allTrendingItems} />
       <Categories />
@@ -31,6 +34,7 @@ export default async function HomePage() {
       <NewArrival />
       <Info />
       <Discount />
+      <Footer />
     </>
   );
 }

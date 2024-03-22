@@ -8,7 +8,7 @@ export default function LikesCount() {
 
   useEffect(() => {
     // This will update the count state whenever the likedProducts change.
-    setCount(likedProducts.length);
+    setCount(likedProducts?.length ?? 0);
   }, [likedProducts]);
 
   if (count === 0) return null;

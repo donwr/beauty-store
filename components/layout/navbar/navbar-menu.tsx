@@ -4,6 +4,7 @@ import { useDropdown } from '@/context/dropdown-context';
 import { useEffect } from 'react';
 import { AccessoriesDropdown } from './menus/accessories-dropdown';
 import { ClothingDropdown } from './menus/clothing-dropdown';
+import { CollectionsDropdown } from './menus/collections-dropdown';
 import GiftsDropdown from './menus/gifts-dropdown';
 import { NewInDropdown } from './menus/new-in-dropdown';
 import { SaleDropdown } from './menus/sale-dropdown';
@@ -20,6 +21,7 @@ const NavbarMenu = () => {
     registerComponent('GIFTS', <GiftsDropdown />);
     registerComponent('SHOES', <ShoesDropdown />);
     registerComponent('ACCESSORIES', <AccessoriesDropdown />);
+    registerComponent('COLLECTIONS', <CollectionsDropdown />);
   }, [registerComponent]);
 
   const menuOptions = [
@@ -36,7 +38,10 @@ const NavbarMenu = () => {
     <ul className="relative flex w-full justify-center space-x-4 text-sm">
       {menuOptions.map((item) => (
         <li key={item} className="group text-xs">
-          <button onClick={() => toggleDropdown(item)} className="focus:outline-none cursor-pointer">
+          <button
+            onClick={() => toggleDropdown(item)}
+            className="cursor-pointer focus:outline-none"
+          >
             {item}
           </button>
           <AnimatedDropdownWrapper isVisible={isDropdownOpen(item)} name={item}>

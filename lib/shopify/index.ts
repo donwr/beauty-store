@@ -257,6 +257,7 @@ export async function updateCart(
 }
 
 export async function fetchProductsByIds(ids: string[]): Promise<LikedItem[]> {
+  const formattedIds = ids.map(id => `gid://shopify/Product/${id}`);
   const response = await fetch(endpoint, {
     method: 'POST',
     headers: {
@@ -265,7 +266,7 @@ export async function fetchProductsByIds(ids: string[]): Promise<LikedItem[]> {
     },
     body: JSON.stringify({
       query: getNodesByIdsQuery,
-      variables: { ids },
+      variables: { ids: formattedIds },
     }),
   });
 

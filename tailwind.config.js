@@ -8,6 +8,9 @@ module.exports = {
       fontFamily: {
         sans: ['var(--font-geist-sans)']
       },
+      gridTemplateColumns: {
+        16: 'repeat(16, minmax(0, 1fr))'
+      },
       keyframes: {
         fadeIn: {
           from: { opacity: 0 },

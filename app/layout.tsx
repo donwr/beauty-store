@@ -1,7 +1,6 @@
-import Footer from '@/components/layout/footer';
+import AuthProvider from '@/context/auth-provider';
 import { DropdownProvider } from '@/context/dropdown-context';
 import { LikedProductsProvider } from '@/context/liked-product-context';
-import Navbar from 'components/layout/navbar';
 import { GeistSans } from 'geist/font';
 import SmoothScrolling from 'lib/smoothScrollling';
 import { ensureStartsWith } from 'lib/utils';
@@ -53,17 +52,17 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
       className={`${GeistSans.variable} ${cormorant.variable} ${montserrat.variable}`}
     >
       <body className="bg-white text-black selection:bg-teal-300">
-        <SmoothScrolling>
-          <LikedProductsProvider>
+        <AuthProvider>
+          <SmoothScrolling>
+            <LikedProductsProvider>
             <DropdownProvider>
-              <Navbar />
               <Suspense>
                 <main>{children}</main>
               </Suspense>
-              <Footer />
             </DropdownProvider>
-          </LikedProductsProvider>
-        </SmoothScrolling>
+            </LikedProductsProvider>
+          </SmoothScrolling>
+        </AuthProvider>
       </body>
     </html>
   );
