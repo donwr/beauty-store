@@ -20,21 +20,10 @@ const defaultContextValue: LikedProductsContextType = {
 const LikedProductsContext = createContext<LikedProductsContextType>(defaultContextValue);
 
 export const LikedProductsProvider = ({ children }: { children: ReactNode }) => {
-  const [likedProducts, setLikedProducts] = useState<LikedItem[] | null>(() => {
-    const likedProductsString = Cookies.get('likedProducts');
-    return likedProductsString ? JSON.parse(likedProductsString) : undefined;
-  });
+  const [likedProducts, setLikedProducts] = useState<LikedItem[] | null>(null);
 
-  const fetchProductDetails = async (globalId: string) => {
-    // Extract the numeric ID from the Shopify Global ID
-    const matches = globalId.match(/Product\/(\d+)/);
-    const productId = matches ? matches[1] : null;
-
-    if (!productId) {
-      throw new Error('Invalid product ID');
-    }
-
-    const response = await fetch(`/api/products/${productId}`);
+  const fetchProductDetails = async (productId: string) => {
+    const response = await fetch(`/api/products/${encodeURIComponent(productId)}`);
     if (!response.ok) {
       throw new Error('Failed to fetch product details');
     }
@@ -85,11 +74,39 @@ export const LikedProductsProvider = ({ children }: { children: ReactNode }) => 
   };
 
   useEffect(() => {
-    const productIds = likedProducts?.map((product) => product.id);
-    if (productIds && productIds.length > 0) {
-      updateLikedProducts(productIds);
-    }
-  }, []); // Ensures this runs once on mount
+    const fetchAndSetLikedProducts = async () => {
+      // Retrieve the stringified product IDs array from the cookies
+      const likedProductsString = Cookies.get('likedProducts');
+
+      // Parse the stringified product IDs array, if it exists
+      if (likedProductsString) {
+        const productIds = JSON.parse(likedProductsString);
+        try {
+          // Fetch details for each product ID concurrently
+          const productsDetailsPromises = productIds.map((productId: string) =>
+            fetchProductDetails(productId).catch((error) => {
+              console.error(`Failed to fetch details for product ${productId}:`, error);
+              return null; // Return null for any failed request
+            })
+          );
+
+          const productsDetails = await Promise.all(productsDetailsPromises);
+          const validProducts = productsDetails.filter((product) => product !== null); // Filter out failed requests
+
+          // Update the state with the fetched product details
+          setLikedProducts(validProducts);
+        } catch (error) {
+          console.error('Error fetching liked products:', error);
+        }
+      } else {
+        // Handle the case where there are no product IDs in cookies
+        console.log('No liked products found in cookies.');
+        setLikedProducts([]);
+      }
+    };
+
+    fetchAndSetLikedProducts();
+  }, []); // Dependency array is empty, so this runs once on component mount
 
   return (
     <LikedProductsContext.Provider

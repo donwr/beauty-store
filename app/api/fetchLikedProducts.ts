@@ -7,6 +7,7 @@ export async function middleware(req: NextRequest) {
   if (req.method === 'POST') {
     try {
       const ids = await req.json();
+      // console.log(ids)
       const likedItems = await fetchProductsByIds(ids.productIds);
       return new NextResponse(JSON.stringify(likedItems), {
         status: 200,
