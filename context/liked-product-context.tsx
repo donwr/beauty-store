@@ -47,8 +47,6 @@ export const LikedProductsProvider = ({ children }: { children: ReactNode }) => 
       const updatedLikedProducts = likedProducts
         ? [...likedProducts, productDetails]
         : [productDetails];
-      console.log('Adding product via context file..');
-      console.log(updateLikedProducts);
       setLikedProducts(updatedLikedProducts);
       Cookies.set(
         'likedProducts',
@@ -65,8 +63,6 @@ export const LikedProductsProvider = ({ children }: { children: ReactNode }) => 
 
     // Filter out the product with the given productId
     const updatedLikedProducts = likedProducts.filter((product) => product.id !== productId);
-    console.log('Removing product via context file..');
-    console.log(updateLikedProducts);
     // Update the state with the filtered list
     setLikedProducts(updatedLikedProducts);
 

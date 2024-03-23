@@ -21,10 +21,8 @@ const HeartButton: React.FC<HeartButtonProps> = ({ productId, className }) => {
   const toggleLike = () => {
     if (isLiked) {
       removeProductFromLiked(productId);
-      console.log('Removing product like...')
     } else {
       addProductToLiked(productId);
-      console.log('Adding product like...')
     }
     setIsLiked(!isLiked);
   };
