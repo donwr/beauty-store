@@ -39,7 +39,7 @@ export function VariantSelector({
   }));
 
   return options.map((option) => (
-    <dl className="mb-8" key={option.id}>
+    <dl className="mb-8 border-t pt-8" key={option.id}>
       <dt className="mb-4 text-sm uppercase tracking-wide">{option.name}</dt>
       <dd className="flex flex-wrap gap-3">
         {option.values.map((value) => {
@@ -86,12 +86,12 @@ export function VariantSelector({
               }}
               title={`${option.name} ${value}${!isAvailableForSale ? ' (Out of Stock)' : ''}`}
               className={clsx(
-                'flex min-w-[48px] items-center justify-center rounded-full border bg-neutral-100 px-2 py-1 text-sm  ',
+                'flex min-h-[48px] min-w-[48px] items-center justify-center rounded-full border border-[#E09C7F] px-2 py-1 text-sm text-[#E09C7F]  ',
                 {
-                  'cursor-default ring-2 ring-[#F4A482]': isActive,
-                  'ring-1 ring-transparent transition duration-300 ease-in-out hover:scale-110 hover:ring-[#F4A482] ':
+                  'cursor-default ring-2 ring-[#E09C7F] text-white bg-[#E09C7F]': isActive,
+                  'ring-1 ring-transparent transition duration-300 ease-in-out hover:scale-110 hover:ring-[#F4A482]':
                     !isActive && isAvailableForSale,
-                  'relative z-10 cursor-not-allowed overflow-hidden bg-neutral-100 text-neutral-500 ring-1 ring-neutral-300 before:absolute before:inset-x-0 before:-z-10 before:h-px before:-rotate-45 before:bg-neutral-300 before:transition-transform ':
+                  'relative z-10 cursor-not-allowed overflow-hidden bg-white ring-1 ring-neutral-300 before:absolute before:inset-x-0 before:-z-10 before:h-px before:-rotate-45 before:bg-neutral-300 before:transition-transform ':
                     !isAvailableForSale
                 }
               )}

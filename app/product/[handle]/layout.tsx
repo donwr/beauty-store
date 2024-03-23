@@ -6,7 +6,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <Suspense>
       <Navbar />
       <Suspense>
-        <main>{children}</main>
+        <main className='max-w-[85.25rem] mx-auto'>{children}</main>
       </Suspense>
       <Footer />
     </Suspense>

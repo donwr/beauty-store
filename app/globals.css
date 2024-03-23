@@ -78,12 +78,12 @@ body {
 }
 
 /* Hide scrollbar for WebKit-based browsers */
-.menu-no-scrollbar::-webkit-scrollbar {
+.no-scrollbar::-webkit-scrollbar,.menu-no-scrollbar::-webkit-scrollbar {
   display: none; /* This will hide the scrollbar in WebKit browsers */
 }
 
 /* Hide scrollbar for Firefox */
-.menu-no-scrollbar {
+.no-scrollbar, .menu-no-scrollbar {
   scrollbar-width: none; /* This will hide the scrollbar in Firefox */
   -ms-overflow-style: none; /* This is for Internet Explorer 10+ */
 }
