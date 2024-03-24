@@ -70,7 +70,7 @@ export default function LoginPage() {
           className="absolute left-0 top-0 z-[2] h-full w-full object-cover object-top lg:hidden"
         />
         <div className="overlay absolute left-0 top-0 z-[3] h-full w-full bg-black/30 lg:hidden"></div>
-        <div className="relative z-[4] mt-12 flex bg-white max-sm:mx-4 md:mt-16 lg:mt-0">
+        <div className="relative z-[4] mt-16 flex bg-white max-sm:mx-4 md:mt-16 lg:mt-0">
           <div className="flex min-h-[36rem] max-w-[30rem] flex-col justify-between border p-4 lg:border-none">
             <div className="group mb-8">
               <h2 className="text-lg">Welcome to Loomi</h2>
@@ -113,7 +113,7 @@ export default function LoginPage() {
                   required
                 />
                 <label htmlFor="terms" className="text-xs text-gray-500">
-                  By creating your account, you agree to our{' '}
+                  By using Loomi, you agree to our{' '}
                   <a href="/terms" className="text-[#F4A482] underline">
                     Terms and Conditions
                   </a>{' '}
@@ -142,31 +142,5 @@ export default function LoginPage() {
         </div>
       </div>
     </div>
-    // <div className="min-h-[80vh] flex justify-center items-center">
-    //     <form onSubmit={handleLogin}>
-    //         <div>
-    //             <label htmlFor="email">Email</label>
-    //             <input
-    //                 type="email"
-    //                 id="email"
-    //                 value={email}
-    //                 onChange={(e) => setEmail(e.target.value)}
-    //                 required
-    //             />
-    //         </div>
-    //         <div>
-    //             <label htmlFor="password">Password</label>
-    //             <input
-    //                 type="password"
-    //                 id="password"
-    //                 value={password}
-    //                 onChange={(e) => setPassword(e.target.value)}
-    //                 required
-    //             />
-    //         </div>
-    //         {loginError && <div>{loginError}</div>}
-    //         <button type="submit">Log in</button>
-    //     </form>
-    // </div>
   );
 }

@@ -16,7 +16,6 @@ export default function LikedProductsModal() {
   const isDesktop = width >= 768;
   const {likedProducts} = useLikedProducts();
 
-  console.log(likedProducts)
   return (
     <>
       <button onClick={openModal} aria-label="Open liked products">

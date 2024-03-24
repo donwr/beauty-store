@@ -4,7 +4,6 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(request: NextRequest) {
   const productId = request.nextUrl.pathname.split('/api/products/')[1];
-  console.log(productId, 'product route GET Request');
   if (!productId) {
     return new NextResponse(JSON.stringify({ error: 'Product ID is required' }), {
       status: 400,

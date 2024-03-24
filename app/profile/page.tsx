@@ -2,22 +2,25 @@
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
+import { LoadingScreen } from './loadingScreen';
 
 const Profile = () => {
   const { data: session, status } = useSession();
   const router = useRouter();
 
   useEffect(() => {
-    // If not authenticated and the status is resolved (not 'loading'), redirect to custom sign-in page
+    // Immediately redirect if not authenticated
     if (status === 'unauthenticated') {
       router.push('/auth/login?callbackUrl=/profile');
     }
   }, [status, router]);
 
-  if (status === 'loading') {
-    return <div>Loading...</div>; // Or some loading indicator
+  if (status === 'loading' || status !== 'authenticated') {
+    // Show loading only or a message indicating redirection
+    return <LoadingScreen />; // Enhanced user feedback during redirection
   }
 
+  // Authenticated user content
   return (
     <div className="bg-[#F7F7F7] py-8">
       <div>
@@ -36,25 +39,25 @@ const Profile = () => {
       </div>
       <div className="grid grid-cols-12 ">
         {/* spacer */}
-        <div className="hidden md:block md:col-span-2"></div>
+        <div className="hidden md:col-span-2 md:block"></div>
         {/* Sidebar navigation */}
-        <div className="col-span-12 md:col-span-2 lg:min-h-[28rem] bg-white">
+        <div className="col-span-12 bg-white md:col-span-2 lg:min-h-[28rem]">
           <div className="sticky top-10 px-4 py-10">
-            <nav className="lg:space-y-1 flex md:block">
+            <nav className="flex md:block lg:space-y-1">
               <a
                 href="#"
-                className="block lg:border-r-2 border-pink-200 p-2 font-semibold text-pink-700"
+                className="block border-pink-200 p-2 font-semibold text-pink-700 lg:border-r-2"
               >
                 Profile info
               </a>
-              <a href="#" className="block p-2 lg:hover:border-r-2 hover:border-r-pink-200">
+              <a href="#" className="block p-2 hover:border-r-pink-200 lg:hover:border-r-2">
                 My orders
               </a>
-              <a href="#" className="block p-2 lg:hover:border-r-2 hover:border-r-pink-200">
+              <a href="#" className="block p-2 hover:border-r-pink-200 lg:hover:border-r-2">
                 Security
               </a>
               {/* ... other nav items ... */}
-              <a href="#" className="block p-2 lg:hover:border-r-2 hover:border-r-pink-200">
+              <a href="#" className="block p-2 hover:border-r-pink-200 lg:hover:border-r-2">
                 Sign out
               </a>
             </nav>
@@ -63,7 +66,7 @@ const Profile = () => {
 
         {/* Profile content */}
 
-        <div className="col-span-12 md:col-span-6 lg:min-h-[28rem] space-y-6 px-4 py-10 bg-white">
+        <div className="col-span-12 space-y-6 bg-white px-4 py-10 md:col-span-6 lg:min-h-[28rem]">
           {/* Profile form */}
           <form className="max-w-4xl space-y-4">
             <div>
@@ -96,7 +99,7 @@ const Profile = () => {
             </div>
             <fieldset>
               <legend className="text-sm font-semibold">Mostly interested in:</legend>
-              <label className="mt-1 inline-flex items-center mr-8">
+              <label className="mr-8 mt-1 inline-flex items-center">
                 <input type="radio" name="interest" value="womenswear" className="form-radio" />
                 <span className="ml-2">Womenswear</span>
               </label>

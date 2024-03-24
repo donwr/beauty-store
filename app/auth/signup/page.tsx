@@ -1,8 +1,8 @@
 'use client';
 import LogoIconAlternate from '@/components/icons/logoAlternate';
 import firebaseApp from '@/firebase/firebaseClient'; // Adjust the path as necessary
-import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
-import { signIn, useSession } from 'next-auth/react';
+import { createUserWithEmailAndPassword, getAuth, sendEmailVerification } from 'firebase/auth';
+import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -36,11 +36,8 @@ export default function SignupPage() {
     try {
       const auth = getAuth(firebaseApp);
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      const user = userCredential.user;
-
-      // After signup, you might want to auto-sign in the user
-      await signIn('credentials', { redirect: false, email, password });
-      router.replace('/'); // or your preferred page
+      await sendEmailVerification(userCredential.user); // Send verification email
+      router.push('/check-email');
     } catch (error: any) {
       console.error('Signup error:', error);
       setError(error.message);
@@ -129,8 +126,11 @@ export default function SignupPage() {
                   type="checkbox"
                   id="terms"
                   className="rounded border border-gray-300 text-[#F4A482]"
+                  checked={agreedToTerms} // Bind the checked attribute to agreedToTerms state
+                  onChange={(e) => setAgreedToTerms(e.target.checked)} // Update state when checkbox is clicked
                   required
                 />
+
                 <label htmlFor="terms" className="text-xs text-gray-500">
                   By creating your account, you agree to our{' '}
                   <a href="/terms" className="text-[#F4A482] underline">
