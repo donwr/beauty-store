@@ -1,4 +1,4 @@
-import firebaseApp from '@/firebase/firebaseClient'; // Adjust the import based on your project structure
+import { app } from '@/firebase/firebaseClient'; // Adjust the import based on your project structure
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
@@ -25,7 +25,7 @@ export const options: NextAuthOptions = {
         }
 
         try {
-          const auth = getAuth(firebaseApp);
+          const auth = getAuth(app);
           const userCredential = await signInWithEmailAndPassword(
             auth,
             credentials.email,

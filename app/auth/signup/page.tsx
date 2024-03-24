@@ -1,6 +1,6 @@
 'use client';
 import LogoIconAlternate from '@/components/icons/logoAlternate';
-import firebaseApp from '@/firebase/firebaseClient'; // Adjust the path as necessary
+import { app } from '@/firebase/firebaseClient'; // Adjust the path as necessary
 import { createUserWithEmailAndPassword, getAuth, sendEmailVerification } from 'firebase/auth';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
@@ -34,7 +34,7 @@ export default function SignupPage() {
     }
 
     try {
-      const auth = getAuth(firebaseApp);
+      const auth = getAuth(app);
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       await sendEmailVerification(userCredential.user); // Send verification email
       router.push('/check-email');
