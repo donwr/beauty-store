@@ -16,11 +16,9 @@ export const runtime = 'edge';
 export default async function CartPage() {
   const cartId = cookies().get('cartId')?.value;
   let cart;
-
   if (cartId) {
     cart = await getCart(cartId);
   }
-  console.log(cart);
 
   return (
     <div className="h-full w-full">
@@ -128,8 +126,8 @@ export default async function CartPage() {
           <div className="col-span-12 lg:col-span-4">
             {cart && (
               <a
-              href={cart.checkoutUrl}
-              className="block w-full bg-[#F4A482] p-2 text-center text-sm font-medium uppercase text-white opacity-90 hover:opacity-100"
+                href={cart.checkoutUrl}
+                className="block w-full bg-[#F4A482] p-2 text-center text-sm font-medium uppercase text-white opacity-90 hover:opacity-100"
               >
                 checkout
               </a>
