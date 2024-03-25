@@ -1,6 +1,7 @@
 import AuthProvider from '@/context/auth-provider';
 import { DropdownProvider } from '@/context/dropdown-context';
 import { LikedProductsProvider } from '@/context/liked-product-context';
+import { UserProvider } from '@/context/user-context';
 import { GeistSans } from 'geist/font';
 import SmoothScrolling from 'lib/smoothScrollling';
 import { ensureStartsWith } from 'lib/utils';
@@ -53,15 +54,17 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
     >
       <body className="bg-white text-black selection:bg-teal-300">
         <AuthProvider>
-          <SmoothScrolling>
-            <LikedProductsProvider>
-            <DropdownProvider>
-              <Suspense>
-                <main>{children}</main>
-              </Suspense>
-            </DropdownProvider>
-            </LikedProductsProvider>
-          </SmoothScrolling>
+          <UserProvider>
+            <SmoothScrolling>
+              <LikedProductsProvider>
+                <DropdownProvider>
+                  <Suspense>
+                    <main>{children}</main>
+                  </Suspense>
+                </DropdownProvider>
+              </LikedProductsProvider>
+            </SmoothScrolling>
+          </UserProvider>
         </AuthProvider>
       </body>
     </html>
